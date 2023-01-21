@@ -1,0 +1,125 @@
+openapi: 3.0.0
+info:
+  title: Organization API
+  version: 1.0.0
+  
+paths:
+  /organizations:
+    post:
+      summary: Create a new organization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                country:
+                  type: string
+                picture:
+                  type: string
+                  format: binary
+                year_of_creation:
+                  type: integer
+                type:
+                  type: string
+                  enum: [retailer,brand]
+                user:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    surname:
+                      type: string
+                    email:
+                      type: string
+                      format: email
+                    password:
+                      type: string
+                      format: password
+                    role:
+                      type: string
+                notifications:
+                  type: object
+                  properties:
+                    be_informed_of_product_likes:
+                      type: boolean
+                    be_informed_of_new_followers:
+                      type: boolean
+                    be_informed_of_new_messages:
+                      type: boolean
+                    be_informed_of_new_draft_order:
+                      type: boolean
+                members:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                        format: email
+                      role:
+                        type: string
+                        enum: [owner,manager,staff]
+
+      responses:
+        '201':
+          description: Organization created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  country:
+                    type: string
+                  picture:
+                    type: string
+                    format: binary
+                  year_of_creation:
+                    type: integer
+                  type:
+                    type: string
+                    enum: [retailer,brand]
+                  user:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      surname:
+                        type: string
+                      email:
+                        type: string
+                        format: email
+                      role:
+                        type: string
+                  notifications:
+                    type: object
+                    properties:
+                      be_informed_of_product_likes:
+                        type: boolean
+                      be_informed_of_new_followers:
+                        type: boolean
+                      be_informed_of_new_messages:
+                        type: boolean
+                      be_informed_of_new_draft_order:
+                        type: boolean
+                  members:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        email:
+                          type: string
+                          format: email
+                        role:
+                          type: string
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
