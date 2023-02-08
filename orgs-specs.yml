@@ -25,7 +25,7 @@ paths:
                   type: integer
                 type:
                   type: string
-                  enum: [retailer,brand]
+                  enum: [retailer,brand,infinite_user]
                 user:
                   type: object
                   properties:
